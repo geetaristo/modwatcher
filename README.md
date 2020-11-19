@@ -22,10 +22,9 @@ module.exports = {
     'cp -R src ../myotherproject/node_modules/mynpm-module',
     'cp -R webpack ../myotherprojectvue-admin/mynpm-module'
   ],
-  ignoreList: { 
-    'node_modules': true, 
-    '.DS_Store': true
-  }
+  ignoreList: [
+    'node_modules', '.DS_Store'
+  ] 
 }
 
 ```

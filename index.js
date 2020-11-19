@@ -99,7 +99,7 @@ function walkTree(dir) {
   const fileList = fs.readdirSync(dir)
 
   fileList.forEach(function (file) {
-    if (globalConfig.ignoreList[file] || file.startsWith('.')) return
+    if (globalConfig.ignoreList.includes(file) || file.startsWith('.')) return
     file = dir + '/' + file
     var stat = fs.statSync(file)
     if (stat && stat.isDirectory()) {
