@@ -7,41 +7,25 @@ const CURRENT_DIR = process.cwd()
 process.chdir(CURRENT_DIR)
 
 function getConfig(configFile) {
-  if (configFile) {
-    const {
-      MonitorSourceDirectory,
-      BuildCommands,
-      DeployCommands,
-      ignoreList
-    } = require(configFile)
+  const {
+    MonitorSourceDirectory,
+    BuildCommands,
+    DeployCommands,
+    ignoreList
+  } = require(configFile)
 
-    if (!MonitorSourceDirectory || MonitorSourceDirectory.length === 0 || !DeployCommands || DeployCommands.length === 0) {
-      const noDirectoryMessage = 'No directory specified to monitor'
-      const noDeployCommandsMessage = 'No commands specified to deploy'
-      const specificErrorMessage = !MonitorSourceDirectory || MonitorSourceDirectory.length === 0 ? noDirectoryMessage : noDeployCommandsMessage
-      throw new Error(`Invalid Config, ${specificErrorMessage}`)
-    }
+  if (!MonitorSourceDirectory || MonitorSourceDirectory.length === 0 || !DeployCommands || DeployCommands.length === 0) {
+    const noDirectoryMessage = 'No directory specified to monitor'
+    const noDeployCommandsMessage = 'No commands specified to deploy'
+    const specificErrorMessage = !MonitorSourceDirectory || MonitorSourceDirectory.length === 0 ? noDirectoryMessage : noDeployCommandsMessage
+    throw new Error(`Invalid Config, ${specificErrorMessage}`)
+  }
 
-    return {
-      MonitorSourceDirectory,
-      BuildCommands,
-      DeployCommands,
-      ignoreList
-    }
-  } else {
-    console.log('no config file found, looking for default mw-config.js')
-    const {
-      MonitorSourceDirectory,
-      BuildCommands,
-      DeployCommands,
-      ignoreList
-    } = require('mw-config')
-    return {
-      MonitorSourceDirectory,
-      BuildCommands,
-      DeployCommands,
-      ignoreList
-    }
+  return {
+    MonitorSourceDirectory,
+    BuildCommands,
+    DeployCommands,
+    ignoreList
   }
 }
 
@@ -171,15 +155,14 @@ async function scanForChanges(path, lastResults = {}) {
 
 function scan() {
   const args = process.argv.slice(2)
-  const configFileName = args[args.length - 1]
-
-  if (configFileName) {
-    const configFilePath = path.join(process.cwd(), configFileName)
-    globalConfig = getConfig(configFilePath)
-    console.log(`loading config file ${configFilePath}`)
-  } else {
-    globalConfig = getConfig(configFilePath)
+  let configFileName = args[args.length - 1]
+  if (!configFileName) {
+    configFileName = 'mw-config.js'
   }
+
+  const configFilePath = path.join(process.cwd(), configFileName)
+  console.log(`loading config file ${configFilePath}`)
+  globalConfig = getConfig(configFilePath)
 
   console.log('Module Watcher Config:')
   console.log(globalConfig)
