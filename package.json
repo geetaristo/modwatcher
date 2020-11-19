@@ -1,0 +1,18 @@
+{
+  "name": "modwatcher",
+  "version": "1.0.0",
+  "description": "automatically deploy an npm module to local projects as the code changes",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./bin/modwatcher.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "modwatcher": "./bin/modwatcher.js"
+  },
+  "author": "Michael Luttrell",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^7.0.1"
+  }
+}
