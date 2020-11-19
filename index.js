@@ -66,7 +66,8 @@ function buildModule() {
     BuildCommands
   } = globalConfig
   if (BuildCommands && BuildCommands.length) {
-    for (buildCommand in BuildCommands) {
+    for (buildCommand of BuildCommands) {
+      console.log(`Executing: ${buildCommand}`)
       const output = execSync(buildCommand, {
         encoding: 'utf-8'
       })
