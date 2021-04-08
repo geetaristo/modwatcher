@@ -19,8 +19,7 @@ module.exports = {
     'cp index.js ../myotherproject/node_modules/mynpm-module',
     'cp -R api ../myotherproject/node_modules/mynpm-module',
     'cp -R node_modules ../myotherproject/node_modules/mynpm-module',
-    'cp -R src ../myotherproject/node_modules/mynpm-module',
-    'cp -R webpack ../myotherprojectvue-admin/mynpm-module'
+    'cp -R src ../myotherproject/node_modules/mynpm-module'
   ],
   ignoreList: [
     'node_modules', '.DS_Store'
